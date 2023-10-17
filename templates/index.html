@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Model</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div id="chat-box">
+        <!-- Chat messages will go here -->
+    </div>
+    <textarea id="user-input" placeholder="Type your message..."></textarea>
+    <button onclick="sendMessage()">Send</button>
+
+    <script>
+        function appendMessage(who, message) {
+            $('#chat-box').append('<p><b>' + who + ':</b> ' + message + '</p>');
+        }
+
+        function sendMessage() {
+            var message = $('#user-input').val();
+            appendMessage('You', message);
+            $('#user-input').val('');
+
+            $.post('/ask', {user_message: message}, function(response) {
+                appendMessage('Model', response.model_response);
+            });
+        }
+    </script>
+</body>
+</html>
