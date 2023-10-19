@@ -89,14 +89,12 @@ def ask():
             }
             response = requests.post(model_endpoint, json=payload)
             result = response.json()
-            print (result)
             reply = result['outputs'][0]['data']
             return jsonify({'model_response': reply})
         else:
             model_endpoint = f'http://{args.inference_host}:8080/predictions/{args.model_name}'
             response = requests.post(model_endpoint, data=user_message)
             if response.status_code == 200:
-                print (response.text)
                 return jsonify({'model_response': response.text})
             else:
                 return jsonify({'model_response': 'Failed to get response from the model'})
