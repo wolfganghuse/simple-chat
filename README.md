@@ -10,9 +10,6 @@ pip install -r requirements.txt
 python3 app.py
 ```
 
---use-k8s=True/False(default) switches to OIP Protocol for Inference. Needed for kserve
-
---inference-host=mpt.examplehost.com Default is localhost, can be used to connect to remote hosts
-
-Model Type is auto-detected when connecting to Inference Host
+When opening the Website you need to connect to an inference host,
+model type and protocol (Text or OIP) is auto-detected when connecting.
 
